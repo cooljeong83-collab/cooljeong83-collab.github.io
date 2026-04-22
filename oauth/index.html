@@ -1,1 +1,66 @@
 
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <style>
+      /* 화면에 아무것도 표시하지 않음 */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+      }
+      body {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      (function () {
+        const qs = new URLSearchParams(location.search);
+        const code = qs.get("code") || "";
+        const state = qs.get("state") || "";
+        const error = qs.get("error") || "";
+        const errorDesc = qs.get("error_description") || "";
+
+        const deep = new URL("ginitapp://oauth/kakao");
+        if (code) deep.searchParams.set("code", code);
+        if (state) deep.searchParams.set("state", state);
+        if (error) deep.searchParams.set("error", error);
+        if (errorDesc) deep.searchParams.set("error_description", errorDesc);
+
+        const deepLink = deep.toString();
+
+        // Android 크롬/커스텀탭이 커스텀 스킴 이동을 막는 경우가 있어 intent:// 폴백을 제공합니다.
+        // (패키지명은 app.config.ts의 android.package = com.ginit.app)
+        const intentLink =
+          "intent://oauth/kakao" +
+          (deep.search ? deep.search : "") +
+          "#Intent;scheme=ginitapp;package=com.ginit.app;end";
+        const ua = navigator.userAgent || "";
+        const isAndroid = /Android/i.test(ua);
+        // 자동 이동 시도 (브라우저 정책에 따라 막히면 intent 폴백)
+        // - 1차: 커스텀 스킴
+        // - 2차(안드로이드): intent:// 강제 열기
+        setTimeout(() => {
+          try {
+            location.replace(deepLink);
+          } finally {
+            if (isAndroid) {
+              setTimeout(() => {
+                location.replace(intentLink);
+              }, 250);
+            }
+          }
+        }, 10);
+      })();
+    </script>
+  </body>
+</html>
+
