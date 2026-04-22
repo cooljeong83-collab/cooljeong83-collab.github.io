@@ -3,28 +3,154 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title></title>
+    <title>로그인 처리 중…</title>
     <style>
-      /* 화면에 아무것도 표시하지 않음 */
+      :root {
+        --ink: #0f172a;
+        --muted: #64748b;
+        --border: rgba(15, 23, 42, 0.12);
+        --bg: #ffffff;
+        --btn: #0f172a;
+        --btnText: #ffffff;
+      }
       html,
       body {
+        height: 100%;
         margin: 0;
         padding: 0;
-        background: transparent;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       }
-      body {
-        width: 0;
-        height: 0;
-        overflow: hidden;
+      .wrap {
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+      }
+      .card {
+        width: 100%;
+        max-width: 420px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+      }
+      .title {
+        margin: 0 0 8px 0;
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: -0.2px;
+      }
+      .sub {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.45;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .btnRow {
+        display: none;
+        margin-top: 12px;
+        gap: 8px;
+      }
+      .btn {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 44px;
+        border-radius: 12px;
+        background: var(--btn);
+        color: var(--btnText);
+        text-decoration: none;
+        font-weight: 900;
+        font-size: 14px;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .btnAlt {
+        background: #334155;
+      }
+      /* 자동 복귀 성공 시 화면을 거의 안 보이게(깜빡임 최소화) */
+      .card.auto {
+        opacity: 0.001;
       }
     </style>
   </head>
   <body>
+    <div class="wrap">
+      <div class="card auto" id="card">
+        <h3 class="title">로그인 처리 중…</h3>
+        <p class="sub" id="msg">앱으로 돌아가는 중입니다.</p>
+        <div class="btnRow" id="btnRow">
+          <a class="btn" id="btn" href="#">앱으로 돌아가기</a>
+          <a class="btn btnAlt" id="btnIntent" href="#" style="display:none">Android용</a>
+        </div>
+      </div>
+    </div>
     <script>
       (function () {
-        // 의도적으로 "아무 것도 하지 않는" 리다이렉트 랜딩 페이지입니다.
-        // 앱은 WebBrowser.openAuthSessionAsync(returnUrl=https://.../oauth)로 이 URL을 감시하며,
-        // 이 페이지에 도달하면 code가 포함된 URL을 앱이 직접 회수합니다.
+        const qs = new URLSearchParams(location.search);
+        const code = qs.get("code") || "";
+        const state = qs.get("state") || "";
+        const error = qs.get("error") || "";
+        const errorDesc = qs.get("error_description") || "";
+
+        const card = document.getElementById("card");
+        const msg = document.getElementById("msg");
+        const btnRow = document.getElementById("btnRow");
+        const btn = document.getElementById("btn");
+        const btnIntent = document.getElementById("btnIntent");
+
+        const deep = new URL("ginitapp://oauth/kakao");
+        if (code) deep.searchParams.set("code", code);
+        if (state) deep.searchParams.set("state", state);
+        if (error) deep.searchParams.set("error", error);
+        if (errorDesc) deep.searchParams.set("error_description", errorDesc);
+        const deepLink = deep.toString();
+
+        // Android 폴백: intent:// 강제 열기
+        const intentLink =
+          "intent://oauth/kakao" +
+          (deep.search ? deep.search : "") +
+          "#Intent;scheme=ginitapp;package=com.ginit.app;end";
+        const ua = navigator.userAgent || "";
+        const isAndroid = /Android/i.test(ua);
+
+        if (btn) btn.href = deepLink;
+        if (isAndroid && btnIntent) {
+          btnIntent.style.display = "inline-flex";
+          btnIntent.href = intentLink;
+        }
+
+        if (error && msg) {
+          msg.textContent = "오류가 발생했습니다: " + error + (errorDesc ? " (" + errorDesc + ")" : "");
+        }
+
+        // 1) 자동 복귀 시도 (최대한 빨리)
+        // Android 정책상 막힐 수 있으므로,
+        // 2) 일정 시간 내 복귀가 안 되면 버튼을 노출(사용자 제스처로 오픈).
+        let revealed = false;
+        const reveal = () => {
+          if (revealed) return;
+          revealed = true;
+          if (card) card.classList.remove("auto");
+          if (btnRow) btnRow.style.display = "flex";
+          if (msg && !error) msg.textContent = "자동으로 돌아가지 않으면 아래 버튼을 눌러주세요.";
+        };
+
+        setTimeout(() => {
+          try {
+            location.href = deepLink;
+          } catch {
+            /* ignore */
+          }
+        }, 30);
+
+        setTimeout(() => {
+          reveal();
+        }, 900);
       })();
     </script>
   </body>
