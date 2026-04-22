@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>로그인 처리 중…</title>
+    <style>
+      body {
+        font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        padding: 18px;
+        color: #0f172a;
+      }
+      .card {
+        max-width: 520px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 14px;
+        padding: 16px;
+      }
+      .muted {
+        color: #64748b;
+        font-size: 13px;
+        line-height: 1.4;
+      }
+      .btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 12px 14px;
+        border-radius: 12px;
+        background: #0f172a;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 800;
+      }
+      code {
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h3>로그인 처리 중…</h3>
+      <p class="muted" id="msg">앱으로 돌아가는 중입니다. 자동으로 안 돌아가면 아래 버튼을 눌러주세요.</p>
+
+      <a id="btn" class="btn" href="#">앱으로 돌아가기</a>
+
+      <p class="muted" style="margin-top: 10px">
+        딥링크: <code id="link"></code>
+      </p>
+    </div>
+
+    <script>
+      (function () {
+        const qs = new URLSearchParams(location.search);
+        const code = qs.get("code") || "";
+        const state = qs.get("state") || "";
+        const error = qs.get("error") || "";
+        const errorDesc = qs.get("error_description") || "";
+
+        const deep = new URL("ginitapp://oauth/kakao");
+        if (code) deep.searchParams.set("code", code);
+        if (state) deep.searchParams.set("state", state);
+        if (error) deep.searchParams.set("error", error);
+        if (errorDesc) deep.searchParams.set("error_description", errorDesc);
+
+        const deepLink = deep.toString();
+        document.getElementById("btn").href = deepLink;
+        document.getElementById("link").textContent = deepLink;
+
+        if (error) {
+          document.getElementById("msg").textContent =
+            "오류가 발생했습니다: " + error + (errorDesc ? " (" + errorDesc + ")" : "");
+        }
+
+        // 자동 이동 시도 (iOS는 막히면 사용자가 버튼을 눌러야 할 수 있음)
+        setTimeout(() => {
+          location.href = deepLink;
+        }, 50);
+      })();
+    </script>
+  </body>
+</html>
+
