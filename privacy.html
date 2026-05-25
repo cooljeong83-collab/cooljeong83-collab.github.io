@@ -12,6 +12,7 @@
             background-color: #f9f9f9;
             padding: 20px;
             margin: 0;
+            transition: background-color 0.3s, color 0.3s;
         }
         .terms-container {
             max-width: 800px;
@@ -20,6 +21,7 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
         h1 {
             font-size: 24px;
@@ -28,6 +30,7 @@
             margin-bottom: 30px;
             border-bottom: 2px solid #eeeeee;
             padding-bottom: 15px;
+            transition: border-color 0.3s, color 0.3s;
         }
         h2 {
             font-size: 16px;
@@ -36,6 +39,7 @@
             margin-bottom: 10px;
             border-left: 4px solid #4A90E2;
             padding-left: 10px;
+            transition: color 0.3s;
         }
         p, ul, ol {
             font-size: 14px;
@@ -56,6 +60,7 @@
             border: 1px solid #eeeeee;
             text-align: left;
             padding: 10px;
+            transition: border-color 0.3s, background-color 0.3s;
         }
         th {
             background-color: #f2f2f2;
@@ -68,6 +73,7 @@
             padding: 2px 4px;
             border-radius: 4px;
             font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
         }
         .footer-text {
             font-size: 13px;
@@ -75,6 +81,42 @@
             margin-top: 30px;
             border-top: 1px solid #eeeeee;
             padding-top: 15px;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        /* 크롬, 사파리, 파이어폭스 등 시스템 다크모드 대응 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #e0e0e0;
+            }
+            .terms-container {
+                background-color: #1e1e1e;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            }
+            h1 {
+                color: #ffffff;
+                border-bottom: 2px solid #333333;
+            }
+            h2 {
+                color: #ffffff;
+                border-left: 4px solid #5A9ee2; /* 조금 더 밝은 블루로 시인성 확보 */
+            }
+            th {
+                background-color: #2a2a2a;
+                color: #ffffff;
+            }
+            th, td {
+                border: 1px solid #333333;
+            }
+            .highlight {
+                background-color: #3d1216; /* 톤다운된 어두운 레드 배경 */
+                color: #ff6b7e; /* 밝은 핑크빛 레드로 글씨 보정 */
+            }
+            .footer-text {
+                color: #aaaaaa;
+                border-top: 1px solid #333333;
+            }
         }
     </style>
 </head>
