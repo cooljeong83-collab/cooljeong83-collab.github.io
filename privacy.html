@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ginit(지닛) 개인정보 처리방침</title>
+    <title id="page-title">Ginit(지닛) 개인정보 처리방침</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -41,10 +41,21 @@
             padding-left: 10px;
             transition: color 0.3s;
         }
+        /* 아랍어 전용 우측 정렬 처리 */
+        html[dir="rtl"] h2 {
+            border-left: none;
+            border-right: 4px solid #4A90E2;
+            padding-left: 0;
+            padding-right: 10px;
+        }
         p, ul, ol {
             font-size: 14px;
             margin: 0 0 15px 0;
             padding-left: 20px;
+        }
+        html[dir="rtl"] p, html[dir="rtl"] ul, html[dir="rtl"] ol {
+            padding-left: 0;
+            padding-right: 20px;
         }
         li {
             margin-bottom: 6px;
@@ -56,11 +67,18 @@
             font-size: 14px;
             max-width: calc(100% - 20px);
         }
+        html[dir="rtl"] table {
+            margin: 15px 20px 15px 0;
+            max-width: calc(100% - 20px);
+        }
         th, td {
             border: 1px solid #eeeeee;
             text-align: left;
             padding: 10px;
             transition: border-color 0.3s, background-color 0.3s;
+        }
+        html[dir="rtl"] th, html[dir="rtl"] td {
+            text-align: right;
         }
         th {
             background-color: #f2f2f2;
@@ -84,126 +102,410 @@
             transition: border-color 0.3s, color 0.3s;
         }
 
-        /* 크롬, 사파리, 파이어폭스 등 시스템 다크모드 대응 */
+        /* 시스템 다크모드 대응 */
         @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #121212;
-                color: #e0e0e0;
-            }
-            .terms-container {
-                background-color: #1e1e1e;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            }
-            h1 {
-                color: #ffffff;
-                border-bottom: 2px solid #333333;
-            }
-            h2 {
-                color: #ffffff;
-                border-left: 4px solid #5A9ee2; /* 조금 더 밝은 블루로 시인성 확보 */
-            }
-            th {
-                background-color: #2a2a2a;
-                color: #ffffff;
-            }
-            th, td {
-                border: 1px solid #333333;
-            }
-            .highlight {
-                background-color: #3d1216; /* 톤다운된 어두운 레드 배경 */
-                color: #ff6b7e; /* 밝은 핑크빛 레드로 글씨 보정 */
-            }
-            .footer-text {
-                color: #aaaaaa;
-                border-top: 1px solid #333333;
-            }
+            body { background-color: #121212; color: #e0e0e0; }
+            .terms-container { background-color: #1e1e1e; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+            h1 { color: #ffffff; border-bottom: 2px solid #333333; }
+            h2 { color: #ffffff; border-left: 4px solid #5A9ee2; }
+            html[dir="rtl"] h2 { border-left: none; border-right: 4px solid #5A9ee2; }
+            th { background-color: #2a2a2a; color: #ffffff; }
+            th, td { border: 1px solid #333333; }
+            .highlight { background-color: #3d1216; color: #ff6b7e; }
+            .footer-text { color: #aaaaaa; border-top: 1px solid #333333; }
         }
     </style>
 </head>
 <body>
 
 <div class="terms-container">
-    <h1>Ginit(지닛) 개인정보 처리방침</h1>
+    <h1 id="main-title"></h1>
+    <p id="intro-text"></p>
 
-    <p><strong>"Ginit(지닛)"</strong>(이하 "회사" 또는 "서비스")은 회원의 개인정보를 소중하게 생각하며, 「개인정보 보호법」 등 관련 법령을 준수하고 있습니다. 회사는 본 개인정보 처리방침을 통하여 회원이 제공하는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보 보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.</p>
-
-    <h2>제 1 조 (수집하는 개인정보 항목 및 수집 방법)</h2>
-    <p>회사는 서비스 제공을 위한 최소한의 개인정보만을 수집하며, <span class="highlight">이름, 전화번호, 주민등록번호 등 다른 민감한 정보는 일절 수집하거나 저장·관리하지 않습니다.</span></p>
+    <h2 id="sec1-title"></h2>
+    <p id="sec1-desc1"></p>
     
     <table>
         <thead>
             <tr>
-                <th>구분</th>
-                <th>수집 항목</th>
-                <th>수집 및 이용 목적</th>
+                <th id="th-category"></th>
+                <th id="th-items"></th>
+                <th id="th-purpose"></th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><strong>구글 계정 연동</strong></td>
-                <td>이메일 주소, 성별, 생년월일</td>
-                <td>구글 로그인을 통한 회원 식별, 계정 연동, 로컬 모임 매칭 및 연령대별 서비스 제한, 고지사항 전달</td>
+                <td><strong id="td-google-title"></strong></td>
+                <td id="td-google-items"></td>
+                <td id="td-google-purpose"></td>
             </tr>
             <tr>
-                <td><strong>자동 수집 항목</strong></td>
-                <td>서비스 이용 기록, 접속 로그, 쿠키, 기기 정보(OS 버전, 모델명)</td>
-                <td>서비스 부정 이용 방지, 서비스 개선 및 통계 분석</td>
+                <td><strong id="td-auto-title"></strong></td>
+                <td id="td-auto-items"></td>
+                <td id="td-auto-purpose"></td>
             </tr>
         </tbody>
     </table>
-    <p>※ 회사는 회원의 별도 회원가입 절차를 생략하고 <strong>구글 로그인(Google Sign-In)</strong> 연동을 통해서만 회원 정보를 수집합니다. 성별 및 생년월일은 최초 연동 시 회원의 명시적인 동의를 얻은 후 안전하게 저장됩니다.</p>
+    <p id="sec1-desc2"></p>
 
-    <h2>제 2 조 (개인정보의 보유 및 이용기간)</h2>
+    <h2 id="sec2-title"></h2>
     <ol>
-        <li>회사는 회원의 개인정보를 회원 가입 시점부터 회원 탈퇴 시까지 보유하고 서비스 제공을 위해 이용합니다. 회원이 탈퇴를 요청하거나 개인정보 수집 및 이용 목적이 달성된 경우, 해당 정보를 지체 없이 파기합니다.</li>
-        <li>단, 관계 법령의 규정에 의하여 보존할 필요가 있는 경우 회사는 아래와 같이 일정 기간 회원 정보를 보관합니다.
+        <li id="sec2-li1"></li>
+        <li>
+            <span id="sec2-li2-text"></span>
             <ul>
-                <li>계약 또는 청약철회 등에 관한 기록: 5년 (전자상거래등에서의 소비자보호에 관한 법률)</li>
-                <li>소비자의 불만 또는 분쟁처리에 관한 기록: 3년 (전자상거래등에서의 소비자보호에 관한 법률)</li>
-                <li>웹사이트 방문 기록(로그): 3개월 (통신비밀보호법)</li>
+                <li id="sec2-sub1"></li>
+                <li id="sec2-sub2"></li>
+                <li id="sec2-sub3"></li>
             </ul>
         </li>
     </ol>
 
-    <h2>제 3 조 (개인정보의 파기 절차 및 방법)</h2>
-    <p>회사는 원칙적으로 개인정보 처리목적이 달성된 경우에는 지체 없이 해당 개인정보를 파기합니다. 파기의 절차 및 방법은 다음과 같습니다.</p>
+    <h2 id="sec3-title"></h2>
+    <p id="sec3-desc"></p>
     <ol>
-        <li><strong>파기 절차:</strong> 회원이 회원 탈퇴를 신청한 경우 목적이 달성된 것으로 보아 즉시 데이터베이스(DB) 내에서 영구 삭제됩니다.</li>
-        <li><strong>파기 방법:</strong> 전자적 파일 형태로 저장된 개인정보는 기록을 재생할 수 없는 기술적 방법(SQL Delete/Truncate 등)을 사용하여 완전하게 삭제합니다.</li>
+        <li id="sec3-li1"></li>
+        <li id="sec3-li2"></li>
     </ol>
 
-    <h2>제 4 조 (개인정보의 제3자 제공 및 위탁)</h2>
-    <p>회사는 회원의 개인정보를 제3자에게 제공하지 않습니다. 단, 다음의 경우에는 예외로 합니다.</p>
+    <h2 id="sec4-title"></h2>
+    <p id="sec4-desc"></p>
     <ol>
-        <li>회원이 사전에 동의한 경우</li>
-        <li>법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li>
+        <li id="sec4-li1"></li>
+        <li id="sec4-li2"></li>
     </ol>
 
-    <h2>제 5 조 (이용자의 권리와 그 행사방법)</h2>
+    <h2 id="sec5-title"></h2>
     <ol>
-        <li>회원은 언제든지 앱 내 '프로필 설정' 또는 '회원 탈퇴' 기능을 통해 자신의 개인정보를 열람, 수정하거나 구글 연동 해지 및 회원 탈퇴(동의 철회)를 할 수 있습니다.</li>
-        <li>회원이 개인정보의 오류에 대한 정정을 요청하신 경우에는 정정을 완료하기 전까지 당해 개인정보를 이용 또는 제공하지 않습니다.</li>
+        <li id="sec5-li1"></li>
+        <li id="sec5-li2"></li>
     </ol>
 
-    <h2>제 6 조 (개인정보 보호를 위한 기술적/관리적 대책)</h2>
-    <p>회사는 회원의 개인정보를 취급함에 있어 분실, 도난, 누출, 변조 또는 훼손되지 않도록 안전성 확보를 위하여 다음과 같은 대책을 강구하고 있습니다.</p>
+    <h2 id="sec6-title"></h2>
+    <p id="sec6-desc"></p>
     <ol>
-        <li><strong>데이터 보호 및 암호화:</strong> 회원의 데이터는 신뢰할 수 있는 클라우드 데이터베이스 인프라 내에서 안전하게 보호되며, 모든 데이터 전송은 암호화 통신(HTTPS/SSL)을 적용하고 있습니다.</li>
-        <li><strong>해킹 등에 대비한 대책:</strong> 외부로부터의 무단 접근을 통제하고 있으며, 시스템 보안 강화를 위해 지속적으로 모니터링을 진행하고 있습니다.</li>
+        <li id="sec6-li1"></li>
+        <li id="sec6-li2"></li>
     </ol>
 
-    <h2>제 7 조 (개인정보 보호책임자 및 상담 신고)</h2>
-    <p>회사는 회원의 개인정보를 보호하고 개인정보와 관련한 불만을 처리하기 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>
+    <h2 id="sec7-title"></h2>
+    <p id="sec7-desc"></p>
     <ul>
-        <li><strong>이름/직책:</strong> Ginit(지닛) 개인정보 관리 담당자</li>
-        <li><strong>이메일:</strong> ginit.official@gmail.com</li>
+        <li id="sec7-li1"></li>
+        <li id="sec7-li2"></li>
     </ul>
 
     <div class="footer-text">
-        <p><strong>부칙</strong></p>
-        <p>본 개인정보 처리방침은 2026년 6월 1일부터 적용됩니다.</p>
+        <p><strong id="footer-appendix"></strong></p>
+        <p id="footer-date"></p>
     </div>
 </div>
 
+<script>
+    const i18n = {
+        ko: {
+            title: "Ginit(지닛) 개인정보 처리방침",
+            intro: "<strong>\"Ginit(지닛)\"</strong>(이하 \"회사\" 또는 \"서비스\")은 회원의 개인정보를 소중하게 생각하며, 「개인정보 보호법」 등 관련 법령을 준수하고 있습니다. 회사는 본 개인정보 처리방침을 통하여 회원이 제공하는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보 보호를 위해 어떠한 조치가 취해지고 있는지 알려드립니다.",
+            sec1_title: "제 1 조 (수집하는 개인정보 항목 및 수집 방법)",
+            sec1_desc1: "회사는 서비스 제공을 위한 최소한의 개인정보만을 수집하며, <span class='highlight'>이름, 전화번호, 주민등록번호 등 다른 민감한 정보는 일절 수집하거나 저장·관리하지 않습니다.</span>",
+            th_cat: "구분", th_items: "수집 항목", th_purp: "수집 및 이용 목적",
+            g_title: "구글 계정 연동", g_items: "이메일 주소, 성별, 생년월일", g_purp: "구글 로그인을 통한 회원 식별, 계정 연동, 로컬 모임 매칭 및 연령대별 서비스 제한, 고지사항 전달",
+            a_title: "자동 수집 항목", a_items: "서비스 이용 기록, 접속 로그, 쿠키, 기기 정보(OS 버전, 모델명)", a_purp: "서비스 부정 이용 방지, 서비스 개선 및 통계 분석",
+            sec1_desc2: "※ 회사는 회원의 별도 회원가입 절차를 생략하고 <strong>구글 로그인(Google Sign-In)</strong> 연동을 통해서만 회원 정보를 수집합니다. 성별 및 생년월일은 최초 연동 시 회원의 명시적인 동의를 얻은 후 안전하게 저장됩니다.",
+            sec2_title: "제 2 조 (개인정보의 보유 및 이용기간)",
+            sec2_li1: "회사는 회원의 개인정보를 회원 가입 시점부터 회원 탈퇴 시까지 보유하고 서비스 제공을 위해 이용합니다. 회원이 탈퇴를 요청하거나 개인정보 수집 및 이용 목적이 달성된 경우, 해당 정보를 지체 없이 파기합니다.",
+            sec2_li2: "단, 관계 법령의 규정에 의하여 보존할 필요가 있는 경우 회사는 아래와 같이 일정 기간 회원 정보를 보관합니다.",
+            sec2_sub1: "계약 또는 청약철회 등에 관한 기록: 5년 (전자상거래등에서의 소비자보호에 관한 법률)",
+            sec2_sub2: "소비자의 불만 또는 분쟁처리에 관한 기록: 3년 (전자상거래등에서의 소비자보호에 관한 법률)",
+            sec2_sub3: "웹사이트 방문 기록(로그): 3개월 (통신비밀보호법)",
+            sec3_title: "제 3 조 (개인정보의 파기 절차 및 방법)",
+            sec3_desc: "회사는 원칙적으로 개인정보 처리목적이 달성된 경우에는 지체 없이 해당 개인정보를 파기합니다. 파기의 절차 및 방법은 다음과 같습니다.",
+            sec3_li1: "<strong>파기 절차:</strong> 회원이 회원 탈퇴를 신청한 경우 목적이 달성된 것으로 보아 즉시 데이터베이스(DB) 내에서 영구 삭제됩니다.",
+            sec3_li2: "<strong>파기 방법:</strong> 전자적 파일 형태로 저장된 개인정보는 기록을 재생할 수 없는 기술적 방법(SQL Delete/Truncate 등)을 사용하여 완전하게 삭제합니다.",
+            sec4_title: "제 4 조 (개인정보의 제3자 제공 및 위탁)",
+            sec4_desc: "회사는 회원의 개인정보를 제3자에게 제공하지 않습니다. 단, 다음의 경우에는 예외로 합니다.",
+            sec4_li1: "회원이 사전에 동의한 경우",
+            sec4_li2: "법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우",
+            sec5_title: "제 5 조 (이용자의 권리와 그 행사방법)",
+            sec5_li1: "회원은 언제든지 앱 내 '프로필 설정' 또는 '회원 탈퇴' 기능을 통해 자신의 개인정보를 열람, 수정하거나 구글 연동 해지 및 회원 탈퇴(동의 철회)를 할 수 있습니다.",
+            sec5_li2: "회원이 개인정보의 오류에 대한 정정을 요청하신 경우에는 정정을 완료하기 전까지 당해 개인정보를 이용 또는 제공하지 않습니다.",
+            sec6_title: "제 6 조 (개인정보 보호를 위한 기술적/관리적 대책)",
+            sec6_desc: "회사는 회원의 개인정보를 취급함에 있어 분실, 도난, 누출, 변조 또는 훼손되지 않도록 안전성 확보를 위하여 다음과 같은 대책을 강구하고 있습니다.",
+            sec6_li1: "<strong>데이터 보호 및 암호화:</strong> 회원의 데이터는 신뢰할 수 있는 클라우드 데이터베이스 인프라 내에서 안전하게 보호되며, 모든 데이터 전송은 암호화 통신(HTTPS/SSL)을 적용하고 있습니다.",
+            sec6_li2: "<strong>해킹 등에 대비한 대책:</strong> 외부로부터의 무단 접근을 통제하고 있으며, 시스템 보안 강화를 위해 지속적으로 모니터링을 진행하고 있습니다.",
+            sec7_title: "제 7 조 (개인정보 보호책임자 및 상담 신고)",
+            sec7_desc: "회사는 회원의 개인정보를 보호하고 개인정보와 관련한 불만을 처리하기 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.",
+            sec7_li1: "<strong>이름/직책:</strong> Ginit(지닛) 개인정보 관리 담당자",
+            sec7_li2: "<strong>이메일:</strong> ginit.official@gmail.com",
+            appendix: "부칙",
+            date: "본 개인정보 처리방침은 2026년 6월 1일부터 적용됩니다."
+        },
+        en: {
+            title: "Ginit Privacy Policy",
+            intro: "<strong>\"Ginit\"</strong> (hereinafter referred to as the \"Company\" or \"Service\") values members' personal information and complies with relevant laws such as the 「Personal Information Protection Act」. Through this Privacy Policy, the Company informs you of the purposes and methods for which the personal information provided by members is used and what measures are being taken to protect personal information.",
+            sec1_title: "Article 1 (Items of Personal Information Collected and Collection Method)",
+            sec1_desc1: "The Company collects only the minimum personal information required to provide the service, and <span class='highlight'>does not collect, store, or manage any other sensitive information such as name, phone number, or Resident Registration Number.</span>",
+            th_cat: "Category", th_items: "Items Collected", th_purp: "Purpose of Collection and Use",
+            g_title: "Google Account Linkage", g_items: "Email address, Gender, Date of birth", g_purp: "Member identification through Google Login, account linkage, local gathering matching and age-restricted service restriction, delivery of notices",
+            a_title: "Automatically Collected Items", a_items: "Service use history, access logs, cookies, device information (OS version, model name)", a_purp: "Prevention of fraudulent service use, service improvement, and statistical analysis",
+            sec1_desc2: "※ The Company skips the separate member registration process and collects member information only through <strong>Google Sign-In</strong> linkage. Gender and date of birth are safely stored after obtaining the member's explicit consent upon initial linkage.",
+            sec2_title: "Article 2 (Retention and Use Period of Personal Information)",
+            sec2_li1: "The Company retains and uses members' personal information from the time of membership registration until membership withdrawal. If a member requests withdrawal or the purpose of collecting and using personal information is achieved, the information will be destroyed without delay.",
+            sec2_li2: "However, if it is necessary to preserve it in accordance with the provisions of relevant laws, the Company stores member information for a certain period as follows.",
+            sec2_sub1: "Records on contracts or subscription cancellation, etc.: 5 years (Act on the Consumer Protection in Electronic Commerce, etc.)",
+            sec2_sub2: "Records on consumer complaints or dispute handling: 3 years (Act on the Consumer Protection in Electronic Commerce, etc.)",
+            sec2_sub3: "Website visit records (log): 3 months (Protection of Communications Secrets Act)",
+            sec3_title: "Article 3 (Procedure and Method of Destruction of Personal Information)",
+            sec3_desc: "In principle, the Company destroys personal information without delay when the purpose of handling personal information is achieved. The procedure and method of destruction are as follows.",
+            sec3_li1: "<strong>Destruction Procedure:</strong> If a member applies for membership withdrawal, it is deemed that the purpose has been achieved, and it is immediately and permanently deleted from the database (DB).",
+            sec3_li2: "<strong>Destruction Method:</strong> Personal information stored in the form of electronic files is completely deleted using technical methods that cannot reproduce records (such as SQL Delete/Truncate).",
+            sec4_title: "Article 4 (Provision and Entrustment of Personal Information to Third Parties)",
+            sec4_desc: "The Company does not provide members' personal information to third parties. However, the following cases are exceptions.",
+            sec4_li1: "If the member consents in advance",
+            sec4_li2: "In accordance with the provisions of laws and regulations, or if there is a request from an investigative agency in accordance with the procedures and methods prescribed by laws and regulations for investigation purposes",
+            sec5_title: "Article 5 (Rights of Users and How to Exercise Them)",
+            sec5_li1: "Members can view, modify their personal information, cancel Google linkage, or withdraw membership (withdraw consent) at any time through the 'Profile Settings' or 'Delete Account' functions within the app.",
+            sec5_li2: "If a member requests correction of an error in personal information, the personal information will not be used or provided until the correction is completed.",
+            sec6_title: "Article 6 (Technical/Managerial Measures for Personal Information Protection)",
+            sec6_desc: "In handling members' personal information, the Company takes the following measures to ensure safety so that personal information is not lost, stolen, leaked, altered, or damaged.",
+            sec6_li1: "<strong>Data Protection and Encryption:</strong> Member data is safely protected within a trusted cloud database infrastructure, and all data transmissions apply encrypted communication (HTTPS/SSL).",
+            sec6_li2: "<strong>Measures against Hacking, etc.:</strong> Unauthorized access from the outside is controlled, and continuous monitoring is being conducted to strengthen system security.",
+            sec7_title: "Article 7 (Chief Privacy Officer and Consultation/Reporting)",
+            sec7_desc: "The Company designates a Chief Privacy Officer as follows to protect members' personal information and handle complaints related to personal information.",
+            sec7_li1: "<strong>Name/Position:</strong> Ginit Privacy Management Officer",
+            sec7_li2: "<strong>Email:</strong> ginit.official@gmail.com",
+            appendix: "Addendum",
+            date: "This Privacy Policy will take effect on June 1, 2026."
+        },
+        ja: {
+            title: "Ginit(ジニット) 個人情報処理方針",
+            intro: "<strong>「Ginit(ジニット)」</strong>(以下「会社」または「サービス」)は、会員の個人情報を大切に考え、「個人情報保護法」などの関連法令を 준수하고 있습니다. 会社は、本個人情報処理方針を通じて、会員が提供する個人情報がどのような用途と方式で利用されており、個人情報保護のためにどのような措置が取られているかをお知らせします。",
+            sec1_title: "第 1 条 (収集する個人情報の項目および収集方法)",
+            sec1_desc1: "会社はサービス提供のための最小限の個人情報のみを収集し、<span class='highlight'>氏名、電話番号、住民登録番号(マイナンバー含む)などの他の機密情報は一切収集、保存・管理しません。</span>",
+            th_cat: "区分", th_items: "収集項目", th_purp: "収集および利用目的",
+            g_title: "Googleアカウント連携", g_items: "メールアドレス、性別、生年月日", g_purp: "Googleログインによる会員識別、アカウント連携、ローカル集まりのマッチングおよび年齢層別のサービス制限、告知事項の伝達",
+            a_title: "自動収集項目", a_items: "サービス利用記録、接続ログ、クッキー、端末情報(OSバージョン、モデル名)", a_purp: "サービスの不正利用防止、サービスの改善および統計分析",
+            sec1_desc2: "※ 会社は会員の別途の会員登録手続きを省略し、<strong>Googleログイン(Google Sign-In)</strong>連携を通じてのみ会員情報を収集します。性別および生年月日は、最初の連携時に会員の明示的な同意を得た後、安全に保存されます。",
+            sec2_title: "第 2 条 (個人情報の保有および利用期間)",
+            sec2_li1: "会社は会員の個人情報を会員登録時から会員退会時まで保有し、サービス提供のために利用します。会員が退会を要求するか、個人情報の収集および利用目的が達成された場合、当該情報を遅滞なく破棄します。",
+            sec2_li2: "ただし、関係法令の規定により保存する必要がある場合、会社は以下のように一定期間会員情報を保管します。",
+            sec2_sub1: "契約または申込撤回などに関する記録: 5年 (電子商取引等における消費者保護に関する法律)",
+            sec2_sub2: "消費者の不満または紛争処理に関する記録: 3年 (電子商取引等における消費者保護に関する法律)",
+            sec2_sub3: "ウェブサイト訪問記録(ログ): 3ヶ月 (通信秘密保護法)",
+            sec3_title: "第 3 条 (個人情報の破棄手続きおよび方法)",
+            sec3_desc: "会社は原則として、個人情報の処理目的が達成された場合には、遅滞なく当該個人情報を破棄します。破棄の手続きおよび方法は以下の通りです。",
+            sec3_li1: "<strong>破棄手続き:</strong> 会員が会員退会を申請した場合、目的が達成されたものとみなし、直ちにデータベース(DB)内で永久に削除されます。",
+            sec3_li2: "<strong>破棄方法:</strong> 電子的なファイル形式で保存された個人情報は、記録を再生できない技術的方法(SQL Delete/Truncateなど)を使用して完全に削除します。",
+            sec4_title: "第 4 条 (個人情報の第三者提供および委託)",
+            sec4_desc: "会社は会員의 個人情報を第三者に提供しません。ただし、次の場合は例外とします。",
+            sec4_li1: "会員が事前に同意した場合",
+            sec4_li2: "法令の規定に基づくか、捜査目的で法令に定められた手続きと方法に従って捜査機関の要求がある場合",
+            sec5_title: "第 5 条 (利用者の権利およびその行使方法)",
+            sec5_li1: "会員はいつでもアプリ内の「プロフィール設定」または「会員退会」機能を通じて、自身の個人情報を閲覧、修正、またはGoogle連携の解除および会員退会(同意の撤回)を行うことができます。",
+            sec5_li2: "会員が個人情報の誤りに対する訂正を要求された場合には、訂正を完了するまで当該個人情報を利用または提供しません。",
+            sec6_title: "第 6 条 (個人情報保護のための技術的/管理的対策)",
+            sec6_desc: "会社は会員の個人情報を取り扱うにあたり、紛失、盗難、漏洩、変造または毀損されないよう、安全性の確保のために以下のような対策を講じています。",
+            sec6_li1: "<strong>データ保護および暗호化:</strong> 会員のデータは、信頼できるクラウドデータベースインフラ内で安全に保護され、すべてのデータ送信は暗号化通信(HTTPS/SSL)を適用しています。",
+            sec6_li2: "<strong>ハッキングなどに備えた対策:</strong> 外部からの不正アクセスを統制しており、システムセキュリティ強化のために継続的にモニタリングを行っています。",
+            sec7_title: "第 7 条 (個人情報保護責任者および相談窓口)",
+            sec7_desc: "会社は会員의 個人情報を保護し、個人情報に関する苦情を処理するために、以下のように個人情報保護責任者を指定しています。",
+            sec7_li1: "<strong>名前/職責:</strong> Ginit(ジニット) 個人情報管理担当者",
+            sec7_li2: "<strong>メール:</strong> ginit.official@gmail.com",
+            appendix: "附則",
+            date: "本個人情報処理方針は2026年6月1日から適用されます。"
+        },
+        zh: {
+            title: "Ginit(吉尼特) 隐私政策",
+            intro: "<strong>\"Ginit(吉尼特)\"</strong>（以下称为“公司”或“服务”）非常重视会员的个人信息，并遵守《个人信息保护法》等相关法律法规。公司通过本隐私政策告知会员，您所提供的个人信息将以何种用途和方式被利用，以及为了保护个人信息正在采取何种措施。",
+            sec1_title: "第一条 （收集的个人信息项目及收集方法）",
+            sec1_desc1: "公司仅收集提供服务所需的最少个人信息，<span class='highlight'>绝不收集、存储或管理姓名、电话号码、居民身份证号码等其他敏感信息。</span>",
+            th_cat: "区分", th_items: "收集项目", th_purp: "收集及利用目的",
+            g_title: "谷歌账号联动", g_items: "电子邮箱地址、性别、出生日期", g_purp: "通过谷歌登录进行会员识别、账号联动、本地聚会匹配及按年龄段限制服务、发送通知事项",
+            a_title: "自动收集项目", a_items: "服务利用记录、访问日志、Cookie、设备信息（OS版本、型号名称）", a_purp: "防止异常利用服务、改善服务及统计分析",
+            sec1_desc2: "※ 公司省略了单独的会员注册程序，仅通过<strong>谷歌登录(Google Sign-In)</strong>联动收集会员信息。性别及出生日期在首次联动时获得会员的明确同意后安全存储。",
+            sec2_title: "第二条 （个人信息的保留及利用期间）",
+            sec2_li1: "公司自会员加入之时起至会员注销之时止保留并利用会员的个人信息。当会员要求注销或个人信息的收集及利用目的达成时，将毫不延迟地销毁相关信息。",
+            sec2_li2: "但根据相关法律法规 mineral 的规定，需要保存时，公司将在以下一定期间内保管会员信息。",
+            sec2_sub1: "关于合同或要约撤回等的记录：5年（电子商务等消费者保护法）",
+            sec2_sub2: "关于消费者投诉或纠纷处理的记录：3年（电子商务等消费者保护法）",
+            sec2_sub3: "网站访问记录（日志）：3个月（通信秘密保护法）",
+            sec3_title: "第三条 （个人信息的销毁程序及方法）",
+            sec3_desc: "原则上，公司在个人信息处理目的达成后，会毫不延迟地销毁相关个人信息。销毁的程序及方法如下：",
+            sec3_li1: "<strong>销毁程序：</strong> 会员申请注销时，视为目的已达成，立即从数据库（DB）内永久删除。",
+            sec3_li2: "<strong>销毁方法：</strong> 以电子文件形式存储的个人信息使用无法再生记录的技术方法（如 SQL Delete/Truncate 等）完全删除。",
+            sec4_title: "第四条 （个人信息的第三方提供及委托）",
+            sec4_desc: "公司不会将会员的个人信息提供给第三方。但以下情况除外：",
+            sec4_li1: "会员事先同意的情况",
+            sec4_li2: "依据法律法规规定，或因侦查目的按照法律法规规定的程序和方法应侦查机关要求的情况",
+            sec5_title: "第五条 （用户的权利及其行使方法）",
+            sec5_li1: "会员可随时通过应用内的“个人资料设置”或“注销会员”功能，查阅、修改自己的个人信息，或进行谷歌联动解除及注销会员（撤回同意）。",
+            sec5_li2: "会员要求更正个人信息错误时，在更正完成前，不利用或提供该个人信息。",
+            sec6_title: "第六条 （保护个人信息的技术性/管理性对策）",
+            sec6_desc: "公司在处理会员的个人信息时，为了确保安全性，防止其丢失、被盗、泄露、变造或毁损，正采取以下对策：",
+            sec6_li1: "<strong>数据保护及加密：</strong> 会员的数据在可信赖的云数据库基础设施内得到安全保护，所有数据传输均采用加密通信（HTTPS/SSL）。",
+            sec6_li2: "<strong>应对黑客攻击等的对策：</strong> 控制来自外部的未经授权的访问，并为了加强系统安全性而持续进行监控。",
+            sec7_title: "第七条 （个人信息保护负责人及咨询举报）",
+            sec7_desc: "公司为了保护会员的个人信息并处理与个人信息相关的投诉，指定了如下个人信息保护负责人：",
+            sec7_li1: "<strong>姓名/职务：</strong> Ginit(吉尼特) 个人信息管理负责人",
+            sec7_li2: "<strong>电子邮箱：</strong> ginit.official@gmail.com",
+            appendix: "附则",
+            date: "本隐私政策自2026年6月1日起适用。"
+        },
+        es: {
+            title: "Política de Privacidad de Ginit",
+            intro: "<strong>\"Ginit\"</strong> (en adelante, la \"Empresa\" o el \"Servicio\") valora la información personal de sus miembros y cumple con las leyes pertinentes, como la 「Ley de Protección de Datos Personales」. A través de esta Política de Privacidad, la Empresa le informa sobre los fines y métodos para los cuales se utiliza la información personal proporcionada por los miembros y qué medidas se están tomando para protegerla.",
+            sec1_title: "Artículo 1 (Elementos de Información Personal Recopilados y Método de Recopilación)",
+            sec1_desc1: "La Empresa recopila solo la información personal mínima requerida para proporcionar el servicio, y <span class='highlight'>no recopila, almacena ni administra ninguna otra información sensible como el nombre, el número de teléfono o el Número de Registro de Residente.</span>",
+            th_cat: "Categoría", th_items: "Elementos Recopilados", th_purp: "Propósito de Recopilación y Uso",
+            g_title: "Vinculación de Cuenta de Google", g_items: "Dirección de correo electrónico, Género, Fecha de nacimiento", g_purp: "Identificación de miembros a través de Google Login, vinculación de cuentas, coincidencia de reuniones locales y restricción de servicios por edad, entrega de avisos",
+            a_title: "Elementos Recopilados Automáticamente", a_items: "Historial de uso del servicio, registros de acceso, cookies, información del dispositivo (versión del sistema operativo, nombre del modelo)", a_purp: "Prevención del uso fraudulento del servicio, mejora del servicio y análisis estadístico",
+            sec1_desc2: "※ La Empresa omite el proceso de registro de miembros por separado y recopila información de los miembros solo a través de la vinculación de <strong>Google Sign-In</strong>. El género y la fecha de nacimiento se almacenan de forma segura después de obtener el consentimiento explícito del miembro tras la vinculación inicial.",
+            sec2_title: "Artículo 2 (Período de Retención y Uso de Información Personal)",
+            sec2_li1: "La Empresa conserva y utiliza la información personal de los miembros desde el momento del registro de la membresía hasta la cancelación de la misma. Si un miembro solicita la cancelación o se logra el propósito de recopilar y utilizar la información personal, la información se destruirá sin demora.",
+            sec2_li2: "Sin embargo, si es necesario conservarlo de acuerdo con las disposiciones de las leyes pertinentes, la Empresa almacena la información de los miembros durante un período determinado de la siguiente manera.",
+            sec2_sub1: "Registros sobre contratos o cancelación de suscripciones, etc.: 5 años (Ley de Protección al Consumidor en el Comercio Electrónico, etc.)",
+            sec2_sub2: "Registros sobre quejas de consumidores o manejo de disputas: 3 años (Ley de Protección al Consumidor en el Comercio Electrónico, etc.)",
+            sec2_sub3: "Registros de visitas al sitio web (registro): 3 meses (Ley de Protección de Secretos de Comunicaciones)",
+            sec3_title: "Artículo 3 (Procedimiento y Método de Destrucción de Información Personal)",
+            sec3_desc: "En principio, la Empresa destruye la información personal sin demora cuando se logra el propósito de manejar la información personal. El procedimiento y método de destrucción son los siguientes.",
+            sec3_li1: "<strong>Procedimiento de Destrucción:</strong> Si un miembro solicita la cancelación de la membresía, se considera que se ha logrado el propósito y se elimina de forma inmediata y permanente de la base de datos (BD).",
+            sec3_li2: "<strong>Método de Destrucción:</strong> La información personal almacenada en forma de archivos electrónicos se elimina por completo mediante métodos técnicos que no pueden reproducir registros (como SQL Delete/Truncate).",
+            sec4_title: "Artículo 4 (Provisión y Encomienda de Información Personal a Terceros)",
+            sec4_desc: "La Empresa no proporciona la información personal de los miembros a terceros. Sin embargo, los siguientes casos son excepciones.",
+            sec4_li1: "Si el miembro consiente de antemano",
+            sec4_li2: "De acuerdo con las disposiciones de las leyes y reglamentos, o si hay una solicitud de una agencia de investigación de acuerdo con los procedimientos y métodos prescritos por las leyes y reglamentos con fines de investigación",
+            sec5_title: "Artículo 5 (Derechos de los Usuarios y Cómo Ejercerlos)",
+            sec5_li1: "Los miembros pueden ver, modificar su información personal, cancelar la vinculación de Google o cancelar la membresía (retirar el consentimiento) en cualquier momento a través de las funciones 'Configuración de Perfil' o 'Eliminar Cuenta' dentro de la aplicación.",
+            sec5_li2: "Si un miembro solicita la corrección de un error en la información personal, la información personal no se utilizará ni se proporcionará hasta que se complete la corrección.",
+            sec6_title: "Artículo 6 (Medidas Técnicas/De Gestión para la Protección de Información Personal)",
+            sec6_desc: "Al manejar la información personal de los miembros, la Empresa toma las siguientes medidas para garantizar la seguridad de modo que la información personal no se pierda, robe, filtre, altere o dañe.",
+            sec6_li1: "<strong>Protección y Cifrado de Datos:</strong> Los datos de los miembros se protegen de forma segura dentro de una infraestructura de base de datos en la nube confiable, y todas las transmisiones de datos aplican comunicación cifrada (HTTPS/SSL).",
+            sec6_li2: "<strong>Medidas contra el Hacking, etc.:</strong> Se controla el acceso no autorizado desde el exterior y se realiza un seguimiento continuo para reforzar la seguridad del sistema.",
+            sec7_title: "Artículo 7 (Oficial de Privacidad y Consulta/Denuncia)",
+            sec7_desc: "La Empresa designa a un Oficial de Privacidad de la siguiente manera para proteger la información personal de los miembros y manejar las quejas relacionadas con la información personal.",
+            sec7_li1: "<strong>Nombre/Cargo:</strong> Responsable de la Gestión de la Privacidad de Ginit",
+            sec7_li2: "<strong>Correo electrónico:</strong> ginit.official@gmail.com",
+            appendix: "Anexo",
+            date: "Esta Política de Privacidad entrará en vigor el 1 de junio de 2026."
+        },
+        ar: {
+            title: "سياسة الخصوصية لـ Ginit",
+            intro: "إن <strong>\"Ginit\"</strong> (يشار إليها فيما بعد باسم \"الشركة\" أو \"الخدمة\") تولي أهمية كبيرة للمعلومات الشخصية لأعضائها وتلتزم بالقوانين ذات الصلة مثل 「قانون حماية المعلومات الشخصية」. ومن خلال سياسة الخصوصية هذه، تبلغكم الشركة بالأغراض والطرق التي يتم من خلالها استخدام المعلومات الشخصية المقدمة من الأعضاء والإجراءات التي يتم اتخاذها لحماية المعلومات الشخصية.",
+            sec1_title: "المادة 1 (عناصر المعلومات الشخصية التي يتم جمعها وطريقة الجمع)",
+            sec1_desc1: "تجمع الشركة الحد الأدنى فقط من المعلومات الشخصية المطلوبة لتقديم الخدمة، و<span class='highlight'>لا تقوم بجمع أو تخزين أو إدارة أي معلومات حساسة أخرى مثل الاسم أو رقم الهاتف أو رقم السجل السكاني (آدهار أو غيره).</span>",
+            th_cat: "الفئة", th_items: "العناصر التي يتم جمعها", th_purp: "الغرض من الجمع والاستخدام",
+            g_title: "ربط حساب Google", g_items: "عنوان البريد الإلكتروني، الجنس، تاريخ الميلاد", g_purp: "تحديد هوية العضو من خلال تسجيل الدخول إلى Google، وربط الحساب، ومطابقة التجمعات المحلية وتقييد الخدمة حسب الفئة العمرية، وتسليم الإشعارات",
+            a_title: "العناصر التي يتم جمعها تلقائيًا", a_items: "سجل استخدام الخدمة، وسجلات الوصول، وملفات تعريف الارتباط (Cookies)، ومعلومات الجهاز (إصدار نظام التشغيل، اسم الطراز)", a_purp: "منع الاستخدام الاحتيالي للخدمة، وتحسين الخدمة، والتحليل الإحصائي",
+            sec1_desc2: "※ تتخطى الشركة عملية تسجيل الأعضاء المنفصلة وتجمع معلومات الأعضاء فقط من خلال ربط <strong>Google Sign-In</strong>. يتم تخزين الجنس وتاريخ الميلاد بأمان بعد الحصول على موافقة العضو الصريحة عند الربط الأولي.",
+            sec2_title: "المادة 2 (فترة الاحتفاظ بالمعلومات الشخصية واستخدامها)",
+            sec2_li1: "تتحفظ الشركة بالمعلومات الشخصية للأعضاء وتستخدمها من وقت تسجيل العضوية وحتى الانسحاب منها. وإذا طلب العضو الانسحاب أو تم تحقيق الغرض من جمع المعلومات الشخصية واستخدامها، فسيتم إتلاف المعلومات دون تأخير.",
+            sec2_li2: "ومع ذلك، إذا كان من الضروري الحفاظ عليها وفقًا لأحكام القوانين ذات الصلة، تقوم الشركة بتخزين معلومات الأعضاء لفترة معينة على النحو التالي.",
+            sec2_sub1: "السجلات المتعلقة بالعقود أو إلغاء الاشتراك، إلخ: 5 سنوات (قانون حماية المستهلك في التجارة الإلكترونية، إلخ.)",
+            sec2_sub2: "السجلات المتعلقة بشكاوى المستهلكين أو معالجة النزاعات: 3 سنوات (قانون حماية المستهلك في التجارة الإلكترونية، إلخ.)",
+            sec2_sub3: "سجلات زيارة الموقع الإلكتروني (السجل): 3 أشهر (قانون حماية أسرار الاتصالات)",
+            sec3_title: "المادة 3 (إجراءات وطريقة إتلاف المعلومات الشخصية)",
+            sec3_desc: "من حيث المبدأ، تقوم الشركة بإتلاف المعلومات الشخصية دون تأخير عند تحقيق الغرض من معالجة المعلومات الشخصية. إجراءات وطريقة الإتلاف هي كما يلي.",
+            sec3_li1: "<strong>إجراء الإتلاف:</strong> إذا تقدم العضو بطلب للانسحاب من العضوية، يُعتبر أن الغرض قد تحقق، ويتم حذفه فورًا ونهائيًا من قاعدة البيانات (DB).",
+            sec3_li2: "<strong>طريقة الإتلاف:</strong> يتم حذف المعلومات الشخصية المخزنة في شكل ملفات إلكترونية تمامًا باستخدام طرق تقنية لا يمكنها إعادة إنتاج السجلات (مثل SQL Delete/Truncate).",
+            sec4_title: "المادة 4 (تقديم المعلومات الشخصية وتفويضها لأطراف ثالثة)",
+            sec4_desc: "لا تقدم الشركة المعلومات الشخصية للأعضاء إلى أطراف ثالثة. ومع ذلك، فإن الحالات التالية تعتبر استثناءات.",
+            sec4_li1: "إذا وافق العضو مسبقًا",
+            sec4_li2: "وفقًا لأحكام القوانين واللوائح، أو إذا كان هناك طلب من جهة تحقيق وفقًا للإجراءات والطرق التي تحددها القوانين واللوائح لأغراض التحقيق",
+            sec5_title: "المادة 5 (حقوق المستخدمين وكيفية ممارستها)",
+            sec5_li1: "يمكن للأعضاء عرض معلوماتهم الشخصية أو تعديلها أو إلغاء ربط Google أو الانسحاب من العضوية (سحب الموافقة) في أي وقت من خلال وظائف 'إعدادات الملف الشخصي' أو 'حذف الحساب' داخل التطبيق.",
+            sec5_li2: "إذا طلب العضو تصحيح خطأ في المعلومات الشخصية، فلن يتم استخدام المعلومات الشخصية أو تقديمها حتى يتم الانتهاء من التصحيح.",
+            sec6_title: "المادة 6 (التدابير التقنية/الإدارية لحماية المعلومات الشخصية)",
+            sec6_desc: "عند التعامل مع المعلومات الشخصية للأعضاء، تتخذ الشركة التدابير التالية لضمان السلامة حتى لا تفقد المعلومات الشخصية أو تسرق أو تسرب أو تعدل أو تتلف.",
+            sec6_li1: "<strong>حماية البيانات وتشفيرها:</strong> يتم حماية بيانات الأعضاء بأمان داخل بنية تحتية موثوقة لقاعدة بيانات سحابية، وتطبق جميع عمليات نقل البيانات اتصالات مشفرة (HTTPS/SSL).",
+            sec6_li2: "<strong>تدابير ضد الاختراق، إلخ:</strong> يتم التحكم في الوصول غير المصرح به من الخارج، ويتم إجراء مراقبة مستمرة لتعزيز أمن النظام.",
+            sec7_title: "المادة 7 (مسؤول الخصوصية الأول والاستشارة/الإبلاغ)",
+            sec7_desc: "تعين الشركة مسؤول خصوصية أول على النحو التالي لحماية المعلومات الشخصية للأعضاء ومعالجة الشكاوى المتعلقة بالمعلومات الشخصية.",
+            sec7_li1: "<strong>الاسم/المنصب:</strong> مسؤول إدارة الخصوصية في Ginit",
+            sec7_li2: "<strong>البريد الإلكتروني:</strong> ginit.official@gmail.com",
+            appendix: "ملحق",
+            date: "تسري سياسة الخصوصية هذه اعتبارًا من 1 يونيو 2026."
+        }
+    };
+
+    function applyLanguage(lang) {
+        const selected = i18n[lang] || i18n.en; // 대응하는 언어가 없으면 영어(en)를 기본으로 설정
+
+        // HTML 태그의 lang 및 dir(정렬방향) 지정
+        document.documentElement.lang = lang;
+        if (lang === 'ar') {
+            document.documentElement.dir = 'rtl';
+        } else {
+            document.documentElement.dir = 'ltr';
+        }
+
+        // 텍스트 매핑
+        document.getElementById("page-title").textContent = selected.title;
+        document.getElementById("main-title").textContent = selected.title;
+        document.getElementById("intro-text").innerHTML = selected.intro;
+        
+        document.getElementById("sec1-title").textContent = selected.sec1_title;
+        document.getElementById("sec1-desc1").innerHTML = selected.sec1_desc1;
+        
+        document.getElementById("th-category").textContent = selected.th_cat;
+        document.getElementById("th-items").textContent = selected.th_items;
+        document.getElementById("th-purpose").textContent = selected.th_purp;
+        
+        document.getElementById("td-google-title").textContent = selected.g_title;
+        document.getElementById("td-google-items").textContent = selected.g_items;
+        document.getElementById("td-google-purpose").textContent = selected.g_purp;
+        
+        document.getElementById("td-auto-title").textContent = selected.a_title;
+        document.getElementById("td-auto-items").textContent = selected.a_items;
+        document.getElementById("td-auto-purpose").textContent = selected.a_purp;
+        
+        document.getElementById("sec1-desc2").innerHTML = selected.sec1_desc2;
+        
+        document.getElementById("sec2-title").textContent = selected.sec2_title;
+        document.getElementById("sec2-li1").textContent = selected.sec2_li1;
+        document.getElementById("sec2-li2-text").textContent = selected.sec2_li2;
+        document.getElementById("sec2-sub1").textContent = selected.sec2_sub1;
+        document.getElementById("sec2-sub2").textContent = selected.sec2_sub2;
+        document.getElementById("sec2-sub3").textContent = selected.sec2_sub3;
+        
+        document.getElementById("sec3-title").textContent = selected.sec3_title;
+        document.getElementById("sec3-desc").textContent = selected.sec3_desc;
+        document.getElementById("sec3-li1").innerHTML = selected.sec3_li1;
+        document.getElementById("sec3-li2").innerHTML = selected.sec3_li2;
+        
+        document.getElementById("sec4-title").textContent = selected.sec4_title;
+        document.getElementById("sec4-desc").textContent = selected.sec4_desc;
+        document.getElementById("sec4-li1").textContent = selected.sec4_li1;
+        document.getElementById("sec4-li2").textContent = selected.sec4_li2;
+        
+        document.getElementById("sec5-title").textContent = selected.sec5_title;
+        document.getElementById("sec5-li1").textContent = selected.sec5_li1;
+        document.getElementById("sec5-li2").textContent = selected.sec5_li2;
+        
+        document.getElementById("sec6-title").textContent = selected.sec6_title;
+        document.getElementById("sec6-desc").textContent = selected.sec6_desc;
+        document.getElementById("sec6-li1").innerHTML = selected.sec6_li1;
+        document.getElementById("sec6-li2").innerHTML = selected.sec6_li2;
+        
+        document.getElementById("sec7-title").textContent = selected.sec7_title;
+        document.getElementById("sec7-desc").textContent = selected.sec7_desc;
+        document.getElementById("sec7-li1").innerHTML = selected.sec7_li1;
+        document.getElementById("sec7-li2").innerHTML = selected.sec7_li2;
+        
+        document.getElementById("footer-appendix").textContent = selected.appendix;
+        document.getElementById("footer-date").textContent = selected.date;
+    }
+
+    // 사용자의 브라우저 기본 언어 코드를 감지합니다. (예: ko, ja, en, ar, zh, es)
+    const userLang = navigator.language || navigator.userLanguage; 
+    const shortLang = userLang.substring(0, 2); // 'ko-KR' -> 'ko' 형태로 축소
+
+    // 지원 대상 언어 코드 체크 후 적용
+    const supportedLanguages = ['ko', 'en', 'ja', 'zh', 'es', 'ar'];
+    if (supportedLanguages.includes(shortLang)) {
+        applyLanguage(shortLang);
+    } else {
+        applyLanguage('en'); // 지원하지 않는 언어일 경우 글로벌 기본값인 영어(en) 적용
+    }
+</script>
 </body>
 </html>
